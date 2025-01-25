@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/paulo-souza/learning_golang/example_persistence/crud"
 	"github.com/paulo-souza/learning_golang/example_persistence/dbconnection"
 )
@@ -14,11 +12,12 @@ func main() {
 		panic(err.Error())
 	}
 
-	fmt.Println("You are connected to the postgres database...")
-	fmt.Println("This is amazing!")
-
 	defer db.Close()
 
-	bookInsert := crud.LacosDeAmor(db)
-	bookInsert.Insert()
+	// bookInsert := crud.LacosDeAmor(db)
+	// bookInsert.Insert()
+
+	bookUpdate := crud.ALendaDeAng(db)
+	bookUpdate.ID = 3
+	bookUpdate.Update()
 }
