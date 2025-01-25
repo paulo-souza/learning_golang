@@ -1,7 +1,19 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/paulo-souza/learning_golang/example_persistence/dbconnection"
+)
 
 func main() {
-	fmt.Println("Criado o arquivo main.go para o exemplo de persistência em go.")
+	db, err := dbconnection.OpenConnection()
+
+	if err != nil {
+		panic(err.Error())
+	}
+
+	fmt.Println("You are connected to the postgres database!!")
+
+	defer db.Close()
 }
