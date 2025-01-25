@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"github.com/paulo-souza/learning_golang/example_persistence/crud"
 	"github.com/paulo-souza/learning_golang/example_persistence/dbconnection"
 )
 
@@ -17,4 +18,7 @@ func main() {
 	fmt.Println("This is amazing!")
 
 	defer db.Close()
+
+	bookInsert := crud.LacosDeAmor(db)
+	bookInsert.Insert()
 }
