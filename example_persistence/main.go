@@ -13,7 +13,8 @@ func main() {
 		panic(err.Error())
 	}
 
-	fmt.Println("You are connected to the postgres database!!")
+	fmt.Println("You are connected to the postgres database...")
+	fmt.Println("This is amazing!")
 
 	defer db.Close()
 }
