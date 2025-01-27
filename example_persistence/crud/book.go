@@ -80,3 +80,47 @@ func (b *Book) SelectById() (bookFound entity.Book) {
 
 	return
 }
+
+func (b *Book) SelectAll() []*entity.Book {
+	booksFound, err := selectAllBooks(b.Db)
+
+	if err != nil {
+		log.Printf("%#v\n", booksFound)
+		panic(err.Error())
+	}
+
+	return booksFound
+}
+
+/*
+Não é legal retornar uma lista vazia por isso faz necessário o uso de []*entity.Book,
+Pois pode conter books dentro do banco de dados, então pode ocorrer um erro,
+e não se sabe quantos books retornará dele.
+[]*entity.Book possibilita retornar nil, exemplo:
+[]*entity.Book{&book1,nil,&book2,nil}
+*/
+func selectAllBooks(db *sql.DB) ([]*entity.Book, error) {
+	sqlStatement := "SELECT id,price,name,format,author,genre,publisher FROM book"
+	res, err := db.Query(sqlStatement)
+
+	if err != nil {
+		return nil, err
+	}
+
+	var books []*entity.Book
+
+	for res.Next() {
+		var book entity.Book
+
+		errorBook := res.Scan(&book.ID, &book.Price, &book.Name,
+			&book.Format, &book.Author,
+			&book.Genre, &book.Publisher)
+
+		if errorBook != nil {
+			return nil, errorBook
+		}
+		books = append(books, &book)
+	}
+
+	return books, nil
+}
