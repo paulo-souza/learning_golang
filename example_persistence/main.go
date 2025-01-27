@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/paulo-souza/learning_golang/example_persistence/crud"
 	"github.com/paulo-souza/learning_golang/example_persistence/dbconnection"
 )
 
@@ -17,7 +16,10 @@ func main() {
 	// bookInsert := crud.LacosDeAmor(db)
 	// bookInsert.Insert()
 
-	bookUpdate := crud.ALendaDeAng(db)
-	bookUpdate.ID = 3
-	bookUpdate.Update()
+	// bookUpdate := crud.ALendaDeAng(db)
+	// bookUpdate.ID = 3
+	// bookUpdate.Update()
+
+	// bookSelectId := crud.Book{ID: 1, Db: db}
+	// fmt.Println(bookSelectId.SelectById())
 }

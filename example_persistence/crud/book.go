@@ -4,6 +4,8 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+
+	"github.com/paulo-souza/learning_golang/example_persistence/entity"
 )
 
 type Book struct {
@@ -26,7 +28,7 @@ func (b *Book) idNotFound() bool {
 
 func (b *Book) Insert() {
 
-	sqlStatement := "INSERT INTO book (price,name, format, author, genre, publisher) VALUES ($1,$2,$3,$4,$5,$6)"
+	sqlStatement := "INSERT INTO book (price,name,format,author,genre,publisher) VALUES ($1,$2,$3,$4,$5,$6)"
 
 	insert, err := b.Db.Prepare(sqlStatement)
 	checkError(err)
@@ -63,4 +65,18 @@ func (b *Book) Update() {
 	checkError(err)
 
 	fmt.Println("Números de registros atualizado(s):", affect)
+}
+
+func (b *Book) SelectById() (bookFound entity.Book) {
+	sqlStatement := "SELECT id,price,name,format,author,genre,publisher FROM book WHERE id = $1"
+	bookValues := []interface{}{
+		&bookFound.ID, &bookFound.Price, &bookFound.Name,
+		&bookFound.Format, &bookFound.Author,
+		&bookFound.Genre, &bookFound.Publisher,
+	}
+
+	err := b.Db.QueryRow(sqlStatement, b.ID).Scan(bookValues...)
+	checkError(err)
+
+	return
 }
