@@ -28,9 +28,5 @@ func main() {
 
 	booksSelectAll := crud.Book{Db: db}
 	allBooks := booksSelectAll.SelectAll()
-
-	for _, book := range allBooks {
-		fmt.Printf("%#v\n", *book)
-	}
-
+	fmt.Println(allBooks)
 }
