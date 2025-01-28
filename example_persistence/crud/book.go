@@ -67,6 +67,26 @@ func (b *Book) Update() {
 	fmt.Println("Números de registros atualizado(s):", affect)
 }
 
+func (b *Book) Delete() {
+	sqlStatement := "DELETE FROM book WHERE id=$1"
+
+	if b.idNotFound() {
+		log.Printf("ID nao foi encontrado. %#v", b)
+		return
+	}
+
+	delete, err := b.Db.Prepare(sqlStatement)
+	checkError(err)
+
+	result, err := delete.Exec(b.ID)
+	checkError(err)
+
+	affect, err := result.RowsAffected()
+	checkError(err)
+
+	fmt.Println("Números de registros deletado(s):", affect)
+}
+
 func (b *Book) SelectById() (bookFound entity.Book) {
 	sqlStatement := "SELECT id,price,name,format,author,genre,publisher FROM book WHERE id = $1"
 	bookValues := []interface{}{
