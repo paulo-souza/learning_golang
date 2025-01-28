@@ -76,3 +76,14 @@ func ExperienciaDoPensamento(db *sql.DB) Book {
 		Db:        db,
 	}
 }
+
+func TodosLivros(db *sql.DB) []Book {
+	book1 := CodigoLimpoBook(db)
+	book2 := ALendaDeAng(db)
+	book3 := AMenteDoEmpreendedor(db)
+	book4 := ExperienciaDoPensamento(db)
+	book5 := LacosDeAmor(db)
+	book6 := JavaUseACabeca(db)
+
+	return []Book{book1, book2, book3, book4, book5, book6}
+}
