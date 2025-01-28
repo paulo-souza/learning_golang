@@ -4,15 +4,20 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"strings"
 
 	"github.com/paulo-souza/learning_golang/example_persistence/entity"
 )
 
 type Book struct {
-	ID                                     int
-	Price                                  float64
-	Name, Format, Author, Genre, Publisher string
-	Db                                     *sql.DB
+	ID        int
+	Price     float64
+	Name      string
+	Format    string
+	Author    string
+	Genre     string
+	Publisher string
+	Db        *sql.DB
 }
 
 func checkError(err error) {
@@ -40,6 +45,39 @@ func (b *Book) Insert() {
 	checkError(err)
 
 	fmt.Println("Números de registros inserido(s):", affect)
+}
+
+func (b *Book) InsertList(books []Book) {
+	sqlStatement := "INSERT INTO book (price,name,format,author,genre,publisher) VALUES "
+
+	var inserts []string
+	var vals []interface{}
+	var argNum int
+	var row string
+
+	increArg := func() int { argNum += 1; return argNum }
+
+	for _, book := range books {
+		row = fmt.Sprintf("($%d,$%d,$%d,$%d,$%d,$%d)", increArg(), increArg(), increArg(), increArg(), increArg(), increArg())
+		inserts = append(inserts, row)
+		vals = append(vals, book.Price, book.Name, book.Format, book.Author, book.Genre, book.Publisher)
+	}
+
+	sqlStatement += strings.Join(inserts, ",")
+
+	// TODO: Refatorar código abaixo, pois encontra-se redundante.
+
+	insert, err := b.Db.Prepare(sqlStatement)
+	checkError(err)
+
+	result, err := insert.Exec(vals...)
+	checkError(err)
+
+	affect, err := result.RowsAffected()
+	checkError(err)
+
+	fmt.Println("Números de registros inserido(s):", affect)
+
 }
 
 func (b *Book) Update() {
