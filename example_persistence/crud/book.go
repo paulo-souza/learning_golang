@@ -31,7 +31,7 @@ func (b *Book) idNotFound() bool {
 	return notFound == b.ID
 }
 
-func (b *Book) execSQL(sqlStatement string, vals []interface{}) int64 {
+func (b *Book) execSQL(sqlStatement string, vals ...interface{}) int64 {
 	prepStmt, err := b.Db.Prepare(sqlStatement)
 	checkError(err)
 
@@ -46,9 +46,8 @@ func (b *Book) execSQL(sqlStatement string, vals []interface{}) int64 {
 
 func (b *Book) Insert() {
 	sqlStatement := "INSERT INTO book (price,name,format,author,genre,publisher) VALUES ($1,$2,$3,$4,$5,$6)"
-	vals := []interface{}{b.Price, b.Name, b.Format, b.Author, b.Genre, b.Publisher}
 
-	affect := b.execSQL(sqlStatement, vals)
+	affect := b.execSQL(sqlStatement, b.Price, b.Name, b.Format, b.Author, b.Genre, b.Publisher)
 	fmt.Println("Números de registros inserido(s):", affect)
 }
 
@@ -70,7 +69,7 @@ func (b *Book) InsertList(books []Book) {
 
 	sqlStatement += strings.Join(inserts, ",")
 
-	affect := b.execSQL(sqlStatement, vals)
+	affect := b.execSQL(sqlStatement, vals...)
 	fmt.Println("Números de registros inserido(s):", affect)
 }
 
@@ -87,9 +86,7 @@ func (b *Book) Update() {
 					genre=$5,publisher=$6
 					WHERE id=$7`
 
-	vals := []interface{}{b.Price, b.Name, b.Format, b.Author, b.Genre, b.Publisher, b.ID}
-
-	affect := b.execSQL(sqlStatement, vals)
+	affect := b.execSQL(sqlStatement, b.Price, b.Name, b.Format, b.Author, b.Genre, b.Publisher, b.ID)
 	fmt.Println("Números de registros atualizado(s):", affect)
 }
 
@@ -101,7 +98,7 @@ func (b *Book) Delete() {
 
 	sqlStatement := "DELETE FROM book WHERE id=$1"
 
-	affect := b.execSQL(sqlStatement, []interface{}{b.ID})
+	affect := b.execSQL(sqlStatement, b.ID)
 	fmt.Println("Números de registros deletado(s):", affect)
 }
 

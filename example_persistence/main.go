@@ -16,21 +16,22 @@ func main() {
 
 	defer db.Close()
 
-	// bookInsert := crud.ExperienciaDoPensamento(db)
+	// bookInsert := crud.LacosDeAmor(db)
 	// bookInsert.Insert()
 
-	// bookUpdate := crud.ALendaDeAng(db)
-	// bookUpdate.ID = 3
+	// bookUpdate := crud.JavaUseACabeca(db)
+	// bookUpdate.ID = 42
 	// bookUpdate.Update()
 
-	// bookSelectId := crud.Book{ID: 1, Db: db}
+	// bookSelectId := crud.Book{ID: 42, Db: db}
 	// fmt.Println(bookSelectId.SelectById())
 
 	booksSelectAll := crud.Book{Db: db}
 	allBooks := booksSelectAll.SelectAll()
 	fmt.Printf("%#v\n", allBooks)
+	fmt.Println("total books =", len(allBooks))
 
-	// bookDelete := crud.Book{Db: db, ID: 2}
+	// bookDelete := crud.Book{Db: db, ID: 42}
 	// bookDelete.Delete()
 
 	// books := crud.TodosLivros()
