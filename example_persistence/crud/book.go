@@ -2,6 +2,7 @@ package crud
 
 import (
 	"database/sql"
+	"errors"
 	"fmt"
 	"log"
 	"strings"
@@ -111,6 +112,12 @@ func (b *Book) SelectById() (bookFound entity.Book) {
 	}
 
 	err := b.Db.QueryRow(sqlStatement, b.ID).Scan(bookValues...)
+
+	if errors.Is(err, sql.ErrNoRows) {
+		log.Printf("ID: %d nao foi encontrado. %#v\n", b.ID, b)
+		return
+	}
+
 	checkError(err)
 
 	return
