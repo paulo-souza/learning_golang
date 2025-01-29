@@ -16,7 +16,7 @@ func main() {
 
 	defer db.Close()
 
-	// bookInsert := crud.LacosDeAmor(db)
+	// bookInsert := crud.ExperienciaDoPensamento(db)
 	// bookInsert.Insert()
 
 	// bookUpdate := crud.ALendaDeAng(db)

@@ -32,19 +32,10 @@ func (b *Book) idNotFound() bool {
 }
 
 func (b *Book) Insert() {
-
 	sqlStatement := "INSERT INTO book (price,name,format,author,genre,publisher) VALUES ($1,$2,$3,$4,$5,$6)"
+	vals := []interface{}{b.Price, b.Name, b.Format, b.Author, b.Genre, b.Publisher}
 
-	insert, err := b.Db.Prepare(sqlStatement)
-	checkError(err)
-
-	result, err := insert.Exec(b.Price, b.Name, b.Format, b.Author, b.Genre, b.Publisher)
-	checkError(err)
-
-	affect, err := result.RowsAffected()
-	checkError(err)
-
-	fmt.Println("Números de registros inserido(s):", affect)
+	b.execInsert(sqlStatement, vals)
 }
 
 func (b *Book) InsertList(books []Book) {
@@ -65,8 +56,10 @@ func (b *Book) InsertList(books []Book) {
 
 	sqlStatement += strings.Join(inserts, ",")
 
-	// TODO: Refatorar código abaixo, pois encontra-se redundante.
+	b.execInsert(sqlStatement, vals)
+}
 
+func (b *Book) execInsert(sqlStatement string, vals []interface{}) {
 	insert, err := b.Db.Prepare(sqlStatement)
 	checkError(err)
 
@@ -77,7 +70,6 @@ func (b *Book) InsertList(books []Book) {
 	checkError(err)
 
 	fmt.Println("Números de registros inserido(s):", affect)
-
 }
 
 func (b *Book) Update() {
