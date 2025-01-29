@@ -27,7 +27,7 @@ func checkError(err error) {
 	}
 }
 
-func (b *Book) idNotFound() bool {
+func (b *Book) isIdZero() bool {
 	const notFound int = 0
 	return notFound == b.ID
 }
@@ -75,7 +75,7 @@ func (b *Book) InsertList(books []Book) {
 }
 
 func (b *Book) Update() {
-	if b.idNotFound() {
+	if b.isIdZero() {
 		log.Printf("ID nao foi encontrado. %#v", b)
 		return
 	}
@@ -92,7 +92,7 @@ func (b *Book) Update() {
 }
 
 func (b *Book) Delete() {
-	if b.idNotFound() {
+	if b.isIdZero() {
 		log.Printf("ID nao foi encontrado. %#v", b)
 		return
 	}
