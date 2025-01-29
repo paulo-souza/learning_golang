@@ -31,11 +31,25 @@ func (b *Book) idNotFound() bool {
 	return notFound == b.ID
 }
 
+func (b *Book) execSQL(sqlStatement string, vals []interface{}) int64 {
+	prepStmt, err := b.Db.Prepare(sqlStatement)
+	checkError(err)
+
+	result, err := prepStmt.Exec(vals...)
+	checkError(err)
+
+	affect, err := result.RowsAffected()
+	checkError(err)
+
+	return affect
+}
+
 func (b *Book) Insert() {
 	sqlStatement := "INSERT INTO book (price,name,format,author,genre,publisher) VALUES ($1,$2,$3,$4,$5,$6)"
 	vals := []interface{}{b.Price, b.Name, b.Format, b.Author, b.Genre, b.Publisher}
 
-	b.execInsert(sqlStatement, vals)
+	affect := b.execSQL(sqlStatement, vals)
+	fmt.Println("Números de registros inserido(s):", affect)
 }
 
 func (b *Book) InsertList(books []Book) {
@@ -56,23 +70,16 @@ func (b *Book) InsertList(books []Book) {
 
 	sqlStatement += strings.Join(inserts, ",")
 
-	b.execInsert(sqlStatement, vals)
-}
-
-func (b *Book) execInsert(sqlStatement string, vals []interface{}) {
-	insert, err := b.Db.Prepare(sqlStatement)
-	checkError(err)
-
-	result, err := insert.Exec(vals...)
-	checkError(err)
-
-	affect, err := result.RowsAffected()
-	checkError(err)
-
+	affect := b.execSQL(sqlStatement, vals)
 	fmt.Println("Números de registros inserido(s):", affect)
 }
 
 func (b *Book) Update() {
+	if b.idNotFound() {
+		log.Printf("ID nao foi encontrado. %#v", b)
+		return
+	}
+
 	sqlStatement := `UPDATE book 
 					SET 
 					price=$1,name=$2,
@@ -80,40 +87,21 @@ func (b *Book) Update() {
 					genre=$5,publisher=$6
 					WHERE id=$7`
 
-	if b.idNotFound() {
-		log.Printf("ID nao foi encontrado. %#v", b)
-		return
-	}
+	vals := []interface{}{b.Price, b.Name, b.Format, b.Author, b.Genre, b.Publisher, b.ID}
 
-	update, err := b.Db.Prepare(sqlStatement)
-	checkError(err)
-
-	result, err := update.Exec(b.Price, b.Name, b.Format, b.Author, b.Genre, b.Publisher, b.ID)
-	checkError(err)
-
-	affect, err := result.RowsAffected()
-	checkError(err)
-
+	affect := b.execSQL(sqlStatement, vals)
 	fmt.Println("Números de registros atualizado(s):", affect)
 }
 
 func (b *Book) Delete() {
-	sqlStatement := "DELETE FROM book WHERE id=$1"
-
 	if b.idNotFound() {
 		log.Printf("ID nao foi encontrado. %#v", b)
 		return
 	}
 
-	delete, err := b.Db.Prepare(sqlStatement)
-	checkError(err)
+	sqlStatement := "DELETE FROM book WHERE id=$1"
 
-	result, err := delete.Exec(b.ID)
-	checkError(err)
-
-	affect, err := result.RowsAffected()
-	checkError(err)
-
+	affect := b.execSQL(sqlStatement, []interface{}{b.ID})
 	fmt.Println("Números de registros deletado(s):", affect)
 }
 
