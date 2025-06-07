@@ -88,6 +88,20 @@ func EighthForm() {
 	fmt.Printf("someFloatNumber = %.4f\n", someFloatNumber)
 }
 
+/*
+An initialization can precede the conditional.
+Variables declared in this way can be accessed by all associated conditional branches.
+*/
+func NinthForm() {
+	if number := 9; number < 0 {
+		fmt.Printf("O numero %d eh negativo.\n", number)
+	} else if number < 10 {
+		fmt.Printf("O numero %d possui somente um digito.\n", number)
+	} else {
+		fmt.Printf("O numero %d possui diversos digitos.\n", number)
+	}
+}
+
 func OtherSamples() {
 	stringWithLineBreak := `primeira linha
 	segunda linha com quebra
@@ -96,5 +110,3 @@ func OtherSamples() {
 	`
 	fmt.Print(stringWithLineBreak)
 }
-
-//TODO: Refatorar para métodos como primeiraForma, segundaForma, terceiraForma
