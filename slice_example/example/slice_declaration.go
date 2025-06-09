@@ -20,3 +20,16 @@ func ThirdForm() {
 	sliceExample := []int{0, 0, 0, 10, 0}
 	fmt.Println(sliceExample)
 }
+
+func FourthForm() {
+	anArrayOfIntegers := [5]int{0, 0, 0, 10, 0}
+	sliceExample := anArrayOfIntegers[0:5]
+	//or
+	// sliceExample := anArrayOfIntegers[:]
+	//or
+	// sliceExample := anArrayOfIntegers[:5]
+	//or
+	// sliceExample := anArrayOfIntegers[0:]
+
+	fmt.Println(sliceExample)
+}

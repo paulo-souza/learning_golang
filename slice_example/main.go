@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	example.ThirdForm()
+	example.FourthForm()
 }
