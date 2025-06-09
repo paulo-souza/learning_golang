@@ -10,6 +10,7 @@ import "fmt"
 	second makes them public.
 */
 
+// Declaration and assignment specifying a type
 func FirstForm() {
 	const pi float32 = 3.1415
 	const eightBits byte = 8
