@@ -23,6 +23,7 @@ func SecondForm() {
 	fmt.Printf("pi = %.4f\ne = %f\n", pi, eulerNumber)
 }
 
+// Grouping constants with specific type
 func ThirdForm() {
 	const (
 		eightBits byte    = 8
