@@ -17,6 +17,7 @@ func FirstForm() {
 	fmt.Printf("pi = %.4f\n1 byte = %d bits\n", pi, eightBits)
 }
 
+// Multiple declaration and assignment specifying a type
 func SecondForm() {
 	const pi, eulerNumber float32 = 3.1415, 2.71828
 	fmt.Printf("pi = %.4f\ne = %f\n", pi, eulerNumber)
