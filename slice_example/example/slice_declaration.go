@@ -9,10 +9,10 @@ func FirstForm() {
 	fmt.Println(sliceExample)
 }
 
+// Example of how to briefly declare a slice by specifying a size and automatically getting a default value relative to the type.
 func SecondForm() {
 	const sliceSize int = 6
 	sliceExample := make([]int, sliceSize)
-	sliceExample[4] = 9
 	fmt.Println(sliceExample)
 }
 
