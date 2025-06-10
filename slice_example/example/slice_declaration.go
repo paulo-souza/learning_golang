@@ -16,6 +16,7 @@ func SecondForm() {
 	fmt.Println(sliceExample)
 }
 
+// Example of how to create a slice in a brief way already initialized with elements.
 func ThirdForm() {
 	sliceExample := []int{0, 0, 0, 10, 0}
 	fmt.Println(sliceExample)
