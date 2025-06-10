@@ -22,6 +22,7 @@ func ThirdForm() {
 	fmt.Println(sliceExample)
 }
 
+// Example of how to create a slice through a link with an array.
 func FourthForm() {
 	anArrayOfIntegers := [5]int{0, 0, 0, 10, 0}
 	sliceExample := anArrayOfIntegers[0:5]
@@ -35,6 +36,7 @@ func FourthForm() {
 	fmt.Println(sliceExample)
 }
 
+// Declaration-only example, which automatically gets an empty slice as the default assigned value.
 func FifthForm() {
 	var sliceExample1 []int
 	fmt.Println(sliceExample1)
