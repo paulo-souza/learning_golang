@@ -33,3 +33,14 @@ func FourthForm() {
 
 	fmt.Println(sliceExample)
 }
+
+func FifthForm() {
+	var sliceExample1 []int
+	fmt.Println(sliceExample1)
+
+	var sliceExample2 []int = make([]int, 0)
+	fmt.Println(sliceExample2)
+
+	sliceExample3 := []int{}
+	fmt.Println(sliceExample3)
+}
