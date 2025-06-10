@@ -2,10 +2,10 @@ package example
 
 import "fmt"
 
+// Example of how to declare a slice specifying a type, size and automatically getting a default value according to its type.
 func FirstForm() {
 	const sliceSize int = 5
 	var sliceExample []int = make([]int, sliceSize)
-	sliceExample[3] = 10
 	fmt.Println(sliceExample)
 }
 
