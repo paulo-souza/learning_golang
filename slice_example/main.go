@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	example.SecondForm()
+	example.Samples()
 }

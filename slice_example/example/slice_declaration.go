@@ -47,3 +47,14 @@ func FifthForm() {
 	sliceExample3 := []int{}
 	fmt.Println(sliceExample3)
 }
+
+// Sample assignment of an element to an existing slice.
+func Samples() {
+	var sliceExample1 []int = make([]int, 4)
+	sliceExample1[1] = 7
+	fmt.Println(sliceExample1)
+
+	sliceExample2 := []int{0, 0, 0, 0}
+	sliceExample2[2] = 10
+	fmt.Println(sliceExample2)
+}
