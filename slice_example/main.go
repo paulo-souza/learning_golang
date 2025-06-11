@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	example.Samples()
+	example.ExampleOfLowAndHigh()
 }
