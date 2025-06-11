@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	example.ExampleOfLowAndHigh()
+	example.WarningWithLowAndHigh()
 }
