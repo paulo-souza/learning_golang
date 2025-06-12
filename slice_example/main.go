@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	example.UsingCopy()
+	example.OtherInterestingThingsAboutAppend()
 }
