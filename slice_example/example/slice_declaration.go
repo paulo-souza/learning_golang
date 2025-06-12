@@ -48,6 +48,21 @@ func FifthForm() {
 	fmt.Println(sliceExample3)
 }
 
+// Declaration already initializing with inline vs multiline elements.
+func SixthForm() {
+	//Does not end with a comma
+	sliceInline := []int{48, 96, 86, 68, 57, 82}
+
+	//It is mandatory to end with a comma
+	sliceMultiline := []int{
+		48, 96, 86,
+		68, 57, 82,
+	}
+
+	fmt.Println(sliceInline)
+	fmt.Println(sliceMultiline)
+}
+
 // Sample assignment of an element to an existing slice.
 func Samples() {
 	var sliceExample1 []int = make([]int, 4)
