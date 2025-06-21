@@ -14,3 +14,9 @@ func FirstForm() {
 		count = count + 1
 	}
 }
+
+func SecondForm() {
+	for count := 1; count <= 10; count++ {
+		fmt.Println(count)
+	}
+}
