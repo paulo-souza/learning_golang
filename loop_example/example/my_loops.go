@@ -28,3 +28,18 @@ func ThirdForm() {
 		fmt.Printf("myArray[%d] = %d\n", index, value)
 	}
 }
+
+func FourthForm() {
+	numbersInEnglish := []string{
+		"One",
+		"Two",
+		"Three",
+		"Four",
+		"Five",
+	}
+
+	// The highlight is the underscore ("_"), which means ignore the index.
+	for _, value := range numbersInEnglish {
+		fmt.Println(value)
+	}
+}
