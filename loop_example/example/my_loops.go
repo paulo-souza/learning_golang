@@ -20,3 +20,11 @@ func SecondForm() {
 		fmt.Println(count)
 	}
 }
+
+func ThirdForm() {
+	var myArray [10]int = [10]int{5, 6, 3, 1, 9, 2, 8, 5, 4, 10}
+
+	for index, value := range myArray {
+		fmt.Printf("myArray[%d] = %d\n", index, value)
+	}
+}
